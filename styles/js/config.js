@@ -16,7 +16,7 @@ let charadex = {};
 /* ==================================================================== */
 charadex.site = {
   title: "Morning Line",
-  url: "https://github.com/mvseratii/morning-line",
+  url: "https://mvseratii.github.io/morning-line",
   description: `A hybrid SIM horse racing art game!`
 }
 
