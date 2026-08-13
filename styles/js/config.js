@@ -658,6 +658,80 @@ charadex.page.slots = {
 
 };
 
+/* Gallery
+/* --------------------------------------------------------------- */
+charadex.page.gallery = {
+
+  sheetPage: charadex.sheet.pages.gallery,
+  sitePage: 'gallery',
+  dexSelector: 'charadex',
+  profileProperty: 'id',
+
+  sort: {
+    toggle: true,
+    key: "timestamp",
+    order: "desc",
+    parameters: []
+  },
+
+  pagination: {
+    toggle: true,
+    bottomToggle: true,
+    amount: 12,
+  },
+
+  filters: {
+    toggle: false,
+    parameters: {}
+  },
+
+  fauxFolder: {
+    toggle: false,
+    folderProperty: '',
+    parameters: [],
+  },
+
+  search: {
+    toggle: true,
+    filterToggle: true,
+    parameters: ['All', 'Title', 'Artist', 'Timestamp']
+  },
+
+  prevNext: {
+    toggle: true,
+    text: 'title',
+  },
+
+  relatedData: {
+
+    [charadex.sheet.pages.masterlist]: {
+
+      sheetPage: charadex.sheet.pages.masterlist,
+      primaryProperty: 'horse',
+      relatedProperty: 'id',
+      dexSelector: 'designs',
+      profileProperty: 'design',
+      profileToggle: true,
+      sitePage: 'masterlist',
+
+      sort: {
+        toggle: false,
+        key: "timestamp",
+        order: "desc",
+        parameters: []
+      },
+
+      pagination: {
+        toggle: false,
+        bottomToggle: true,
+        amount: 6,
+      },
+    },
+
+  }
+
+};
+
 
 /* Index
 /* --------------------------------------------------------------- */
