@@ -19,7 +19,7 @@ charadex.buildList = (selector = 'charadex') => {
     listClass: `${selector}-list`,
     item: `${selector}-gallery-item`,
   }
-
+  
   /* Initialize Gallery
   ===================================================================== */
   const initializeGallery = (galleryArray, additionalListConfigs, gallerySelector) => {
@@ -28,10 +28,10 @@ charadex.buildList = (selector = 'charadex') => {
     if (!charadex.tools.checkArray(galleryArray)) return false;
 
     // Create list classes
-    listConfig.valueNames = charadex.tools.createListClasses(galleryArray);
+    listConfig.valueNames =  charadex.tools.createListClasses(galleryArray);
 
     // Return the list
-    return new List(gallerySelector || `${selector}-gallery`, { ...listConfig, ...additionalListConfigs }, galleryArray);
+    return new List(gallerySelector || `${selector}-gallery`, {...listConfig, ...additionalListConfigs}, galleryArray);
 
   };
 
@@ -51,7 +51,7 @@ charadex.buildList = (selector = 'charadex') => {
 
     // Return the profile in an array if it exists 
     return profile ? [profile] : false;
-
+  
   };
 
   /* Initialize Profile
@@ -172,7 +172,7 @@ charadex.listFeatures.filters = (parameters, selector = 'charadex') => {
 
       });
     });
-
+    
     // If they're in a container, hide it if there's nothing in it
     listJs.on('updated', (list) => {
       let listClass = $(`.${list.listClass}`);
@@ -306,7 +306,7 @@ charadex.listFeatures.search = (searchParameters, searchFilterToggle = true, sel
   const initializeSearch = (listJs) => {
 
     if (!listJs) return false;
-
+    
     // Else create the search
     createSearch();
 
@@ -346,11 +346,11 @@ charadex.listFeatures.prevNextLink = function (pageUrl, galleryArray, profileArr
   if (!charadex.tools.checkArray(galleryArray) || !charadex.tools.checkArray(profileArray) || !pageUrl) return false;
 
   // Will help us create links
-  const updateLink = (selector, profile, profiletext) => {
+  const updateLink = (selector, profile) => {
     const element = $(selector);
     if (profile) {
       element.attr('href', charadex.url.addUrlParameters(pageUrl, { profile: profile.profileid }));
-      element.find('span').text(profile[profiletext]);
+      element.find('span').text(profile.profileid);
       element.show();
     } else {
       element.hide();

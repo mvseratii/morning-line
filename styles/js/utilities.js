@@ -102,7 +102,7 @@ charadex.tools = {
     return newArr;
 
   },
-
+  
   // Adds profile links
   addProfileLinks(entry, pageUrl, key = 1) {
     entry.profileid = entry[key];
@@ -110,17 +110,17 @@ charadex.tools = {
   },
 
   // Try to add the select picker
-  addMultiselect(selectElement) {
+  addMultiselect (selectElement) {
     try {
       selectElement.selectpicker({
-        noneSelectedText: `All`,
+        noneSelectedText : `All`,
         style: '',
         styleBase: 'form-control'
       });
-    } catch (err) {
-      console.error('Make sure the Multiselect CDN is in this file.')
+    } catch (err) { 
+      console.error('Make sure the Multiselect CDN is in this file.') 
     }
-  }
+  } 
 
 }
 
@@ -252,7 +252,7 @@ charadex.manageData = {
       for (let key in criteria) {
 
         // Make the values into an array no matter what
-        if (!charadex.tools.checkArray(criteria[key])) criteria[key] = [criteria[key]];
+        if(!charadex.tools.checkArray(criteria[key])) criteria[key] = [criteria[key]];
 
         // Scrub criteria
         criteria[key] = criteria[key].map(c => charadex.tools.scrub(c)).filter(c => c !== 'all');
@@ -261,8 +261,8 @@ charadex.manageData = {
         if (charadex.tools.checkArray(item[key])) {
           item[key] = item[key].map(i => charadex.tools.scrub(i));
           for (const name of criteria[key]) if (!item[key].includes(name)) return false;
-        }
-
+        } 
+        
         // Else check the string
         else if (!criteria[key].includes(charadex.tools.scrub(item[key]))) return false;
 
@@ -288,8 +288,8 @@ charadex.manageData = {
   },
 
   /* Relates data to a main sheet via a key
-   ===================================================================== */
-  async relateData(primaryArray, primaryKey, secondaryPageName, secondaryKey) {
+  ===================================================================== */
+  async relateData (primaryArray, primaryKey, secondaryPageName, secondaryKey) {
 
     let scrub = charadex.tools.scrub;
     let secondaryArray = await charadex.importSheet(secondaryPageName);
@@ -309,6 +309,17 @@ charadex.manageData = {
       }
     }
 
+  },
+
+  /* Relates inventory data specifically
+  ===================================================================== */
+  async relateInventory(inventoryArr) {
+    let itemArr = await charadex.importSheet('Items');
+    for (let index in inventoryArr) {
+      for (let item of itemArr) {
+        if (inventoryArr[index].item === item.item) inventoryArr[index] = { ...inventoryArr[index], ...item };
+      }
+    }
   },
 
   /* Fixes old style of inventories
@@ -383,10 +394,10 @@ charadex.importSheet = async (sheetPage, sheetId = charadex.sheet.id) => {
     const row = {};
     const isBoolean = val => 'boolean' === typeof val;
     col.forEach((ele, ind) => {
-      row[ele] = info.c[ind] != null ?
-        info.c[ind].f != null && !isBoolean(info.c[ind].v) ?
-          info.c[ind].f : info.c[ind].v != null ?
-            info.c[ind].v : "" : "";
+        row[ele] = info.c[ind] != null ? 
+        info.c[ind].f != null && !isBoolean(info.c[ind].v) ? 
+        info.c[ind].f : info.c[ind].v != null ? 
+        info.c[ind].v : "" : "";
     });
     scrubbedData.push(row);
   };

@@ -740,8 +740,8 @@ p:last-child {
 
 /* For the hero image in the index */
 .cd-hero-title {
-  color: var(--cd-secondary-text-color);
-  background-color: var(--cd-primary-color);
+  color: var(--cd-primary-color);
+  background-color: var(--cd-faded-background-color);
   border-radius: var(--cd-border-radius);
   font-family: var(--cd-header-font-family);
   display: flex;
