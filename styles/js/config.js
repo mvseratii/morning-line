@@ -26,7 +26,7 @@ charadex.site = {
 /* ==================================================================== */
 charadex.sheet = {
 
-  id: "1EsA46flCx0Mr5AG-fbdx5MLiOTx4o9Wh5UwGjUh9U98",
+  id: "1PGC2UW27AoaDeu50H8xrCfsQ4EvedKzkCieIRtBVrYk",
 
   pages: {
     masterlist:    "masterlist",
@@ -40,7 +40,8 @@ charadex.sheet = {
     faq:           "faq",
     lineage:       "lineage",
     gallery:       "gallery",
-    slots:         "slots"
+    slots:         "slots",
+    staff:         "mods",
   },
 
   experience: {
