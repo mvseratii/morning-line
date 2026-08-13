@@ -57,11 +57,11 @@ charadex.tools = {
       $(loadAreaSelector).addClass('active');
     }, timeout);
   },
-  
+
   // Change meta information
   updateMeta() {
     try {
-      let title =  $('title');
+      let title = $('title');
       let titleStr = title.text();
       if ((titleStr).includes('Charadex')) {
         titleStr = titleStr.replace('Charadex', charadex.site.title);
@@ -297,8 +297,14 @@ charadex.manageData = {
     for (let primaryEntry of primaryArray) {
       primaryEntry[scrub(secondaryPageName)] = [];
       for (let secondaryEntry of secondaryArray) {
-        if (scrub(primaryEntry[primaryKey]) == scrub(secondaryEntry[secondaryKey])) {
-          primaryEntry[scrub(secondaryPageName)].push(secondaryEntry);
+        let secondaryDataArray = secondaryEntry[secondaryKey].split(',');
+        for (let prop of secondaryDataArray) {
+          const secondaryIDs = new Set(prop.split(','));
+          const primaryIDs = primaryEntry[primaryKey].split(',');
+
+          if (primaryIDs.some(i => secondaryIDs.has(i))) {
+            primaryEntry[scrub(secondaryPageName)].push(secondaryEntry);
+          }
         }
       }
     }
@@ -307,15 +313,37 @@ charadex.manageData = {
 
   /* Relates inventory data specifically
   ===================================================================== */
-  async relateInventory (inventoryArr) {
+  async relateInventory(inventoryArr) {
     let itemArr = await charadex.importSheet('Items');
     for (let index in inventoryArr) {
       for (let item of itemArr) {
-        if (inventoryArr[index].item === item.item) inventoryArr[index] = {...inventoryArr[index], ...item};
+        if (inventoryArr[index].item === item.item) inventoryArr[index] = { ...inventoryArr[index], ...item };
       }
     }
   },
-  
+
+  /* Fixes old style of inventories
+  ===================================================================== */
+  async inventoryFix(profileArray) {
+
+    let itemArr = await charadex.importSheet(charadex.sheet.pages.items);
+
+    let inventoryData = [];
+    for (let property in profileArray) {
+      for (let item of itemArr) {
+        if (property === charadex.tools.scrub(item.item) && profileArray[property] !== '') inventoryData.push({
+          ...item,
+          ... {
+            quantity: profileArray[property]
+          }
+        });
+      }
+    }
+
+    return inventoryData;
+
+  },
+
   /* Adds profile links
   ===================================================================== */
   addProfileLinks(pageUrl, key, galleryArray) {

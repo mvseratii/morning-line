@@ -62,7 +62,7 @@ charadex.buildList = (selector = 'charadex') => {
     if (!charadex.tools.checkArray(profileArray)) return false;
 
     // Create list classes & update the item name
-    listConfig.valueNames =  charadex.tools.createListClasses(profileArray);
+    listConfig.valueNames = charadex.tools.createListClasses(profileArray);
     listConfig.item = `${selector}-profile`;
 
     // Return the list
@@ -112,18 +112,18 @@ charadex.listFeatures.filters = (parameters, selector = 'charadex') => {
 
       // Remove the id and add a special class
       newFilter
-      .removeAttr('id')
-      .addClass(filterClass);
+        .removeAttr('id')
+        .addClass(filterClass);
 
       // Find the label and add the filter name
       newFilter
-      .find('label')
-      .text(filter);
+        .find('label')
+        .text(filter);
 
       // Find the select and add the filter name & options
       let filterDOM = newFilter.find('select')
-      .attr('name', charadex.tools.scrub(filter))
-      .append(charadex.tools.createSelectOptions(parameters[filter]));
+        .attr('name', charadex.tools.scrub(filter))
+        .append(charadex.tools.createSelectOptions(parameters[filter]));
 
       // Add multiselect
       charadex.tools.addMultiselect(filterDOM);
@@ -135,7 +135,7 @@ charadex.listFeatures.filters = (parameters, selector = 'charadex') => {
 
     return true;
 
-  } 
+  }
 
   // Create the filters when created;
   createFilters();
@@ -148,7 +148,7 @@ charadex.listFeatures.filters = (parameters, selector = 'charadex') => {
     filtersElement.parents(`#${selector}-filter-container`).show();
 
     // Deal with the Dom
-    $(`.${filterClass}`).each(function(el) {
+    $(`.${filterClass}`).each(function (el) {
       $(this).on('change', () => {
 
         // Get the key from the select name attr
@@ -340,7 +340,7 @@ charadex.listFeatures.search = (searchParameters, searchFilterToggle = true, sel
 /* ==================================================================== */
 /* Prev Next Link
 ======================================================================= */
-charadex.listFeatures.prevNextLink = function (pageUrl, galleryArray, profileArray, selector = 'charadex') {
+charadex.listFeatures.prevNextLink = function (pageUrl, galleryArray, profileArray, profiletext, selector = 'charadex') {
 
   // Checks
   if (!charadex.tools.checkArray(galleryArray) || !charadex.tools.checkArray(profileArray) || !pageUrl) return false;
@@ -362,12 +362,12 @@ charadex.listFeatures.prevNextLink = function (pageUrl, galleryArray, profileArr
   if (currentIndex === -1) return false;
 
   // Add links based on links
-  updateLink('#entryPrev', galleryArray[currentIndex - 1] || null);
-  updateLink('#entryNext', galleryArray[currentIndex + 1] || null);
+  updateLink('#entryPrev', galleryArray[currentIndex - 1] || null, profiletext);
+  updateLink('#entryNext', galleryArray[currentIndex + 1] || null, profiletext);
 
   // Show the prevnext buttons
   $(`#${selector}-prevnext-container`).show();
-  
+
   return true;
 
 };

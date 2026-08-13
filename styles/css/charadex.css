@@ -474,6 +474,20 @@ a:active {
   border-radius: 0 0  calc(var(--cd-border-radius) - 1px) calc(var(--cd-border-radius) - 1px) !important;
 }
 
+.list-group-item {
+  background-color: var(--cd-card-background-color) !important;
+}
+
+.list-group-item:first-child {
+  border-top-left-radius: calc(var(--cd-border-radius) - 1px) calc(var(--cd-border-radius) - 1px) !important;
+  border-top-right-radius: calc(var(--cd-border-radius) - 1px) calc(var(--cd-border-radius) - 1px) !important;
+}
+
+.list-group-item:last-child {
+  border-bottom-left-radius: calc(var(--cd-border-radius) - 1px) calc(var(--cd-border-radius) - 1px) !important;
+  border-bottom-right-radius: calc(var(--cd-border-radius) - 1px) calc(var(--cd-border-radius) - 1px) !important;
+}
+
 
 
 /* ============================================================= */
@@ -735,6 +749,8 @@ p:last-child {
   min-height: 250px;
   font-weight: 800;
   font-size: 2.5rem;
+  background-size: cover;
+  background-position: center;
 }
 
 @media (min-width: 768px) {
@@ -773,4 +789,55 @@ p:last-child {
 .badge-mythic {
   background-color: var(--cd-rarity-legendary-bg);
   color: var(--cd-rarity-legendary-txt);
+}
+
+
+/* ============================================================= */
+/* HARPG TWEAKS
+/* ============================================================= */
+
+.card-header:last-child {
+  border-radius: inherit !important;
+  border: none !important;
+}
+
+.cd-design-container {
+  position: relative;
+  height: 92px;
+}
+
+.cd-design-background {
+  position: absolute;
+  background-size: 500px;
+  background-position: -40px 16%;
+  top: 0;
+  bottom: 0;
+  right: 50%;
+  left: 0;
+}
+
+.cd-design-background::after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  content: "";
+  background: linear-gradient(250deg, var(--cd-faded-background-color) 17%, transparent 60%)
+}
+
+.cd-design-info {
+  z-index: 2;
+}
+
+.cd-design-container:first-child .cd-design-background {
+  border-top-left-radius: calc(var(--cd-border-radius) - 1px) !important;
+}
+
+.cd-design-container:last-child .cd-design-background {
+  border-bottom-left-radius: calc(var(--cd-border-radius) - 1px) !important;
+}
+
+.cd-slot-unavailable {
+  opacity: 0.5;
 }

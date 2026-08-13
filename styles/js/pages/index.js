@@ -52,6 +52,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   });
 
+  /* Gallery
+  ===================================================================== */
+  let gallery = await charadex.initialize.page(null, charadex.page.index.gallery, (arr) => {
+
+    // Splice the silly little array
+    let sliceAmount = charadex.page.index.gallery.amount || 6;
+    arr.splice(sliceAmount, arr.length);
+
+  });
+
 
   /* Load Page
   ===================================================================== */

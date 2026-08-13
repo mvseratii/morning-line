@@ -15,9 +15,9 @@ let charadex = {};
 /* Any preview links will still show Charadex's information
 /* ==================================================================== */
 charadex.site = {
-  title: "Charadex",
-  url: "https://charadex-team.github.io/charadex-v1.0/",
-  description: `A tool for organizing small ARPGs and species.`
+  title: "Morning Line",
+  url: "https://github.com/mvseratii/morning-line",
+  description: `A hybrid SIM horse racing art game!`
 }
 
 /* ==================================================================== */
@@ -38,12 +38,35 @@ charadex.sheet = {
     traits:        "traits",
     prompts:       "prompts",
     faq:           "faq",
+    lineage:       "lineage",
+    gallery:       "gallery",
+    slots:         "slots"
+  },
+
+  experience: {
+    toggle: true, // set this to "false" if you don't want to track experience!
+    ranks: [ // you're free to change the ranks here
+      [25, 'Quality Merit'],
+      [75, 'Refined Merit'],
+      [150, 'Superior Merit'],
+      [250, 'Exemplary Merit'],
+      [400, 'Noble Merit'],
+      [425, 'Quality Pretige'],
+      [475, 'Refined Prestige'],
+      [550, 'Superior Prestige'],
+      [650, 'Exemplary Prestige'],
+      [800, 'Noble Prestige'],
+      [1000, 'Hall Of Fame']
+    ]
   },
 
   options: {
 
     designTypes: ['All', 'Official Design', 'Guest Design', 'MYO Slot', 'MYO Design'],
     statuses: ['All', 'Resell', 'Trade', 'Gift', 'Voided', 'For Sale', 'Purchased'],
+    genders: ["Stallion", "Mare", "Gelding", "Mare (infertile)"],
+    breeds: ["Loshenka"],
+    slotStatutes: ['Available', 'Pending', 'Used', 'Relinquished'],
     rarity: ['All', 'Common', 'Uncommon', 'Rare', 'Very Rare', 'Legendary'],
     species: ['All', 'Dog', 'Cat', 'Bunny'],
     itemTypes: ['All', 'Currency', 'MYO Slot', 'Pet', 'Trait', 'Misc'],
@@ -331,19 +354,20 @@ charadex.page.masterlist = {
       'Design Type': charadex.sheet.options.designTypes,
       'Status': charadex.sheet.options.statuses,
       'Rarity': charadex.sheet.options.rarity,
+      'gender': charadex.sheet.options.genders,
     }
   },
 
   fauxFolder: {
     toggle: true,
-    folderProperty: 'Species',
-    parameters: charadex.sheet.options.species,
+    folderProperty: 'Breed',
+    parameters: charadex.sheet.options.breeds,
   },
 
   search: {
     toggle: true,
     filterToggle: true,
-    parameters: ['All', 'ID', 'Design', 'Owner', 'Designer', 'Artist', 'Traits']
+    parameters: ['All', 'ID', 'Showname', 'Callname', 'Design', 'Owner', 'Designer', 'Artist', 'Traits']
   },
 
   prevNext: {
@@ -374,7 +398,79 @@ charadex.page.masterlist = {
         amount: 12,
       },
 
-    }
+    },
+
+    [charadex.sheet.pages.lineage]: {
+
+      sheetPage: charadex.sheet.pages.lineage,
+      primaryProperty: 'id',
+      relatedProperty: 'horse',
+      dexSelector: 'lineaged',
+      profileProperty: 'id',
+      profileToggle: false,
+
+      sort: {
+        toggle: true,
+        key: "",
+        order: "asc",
+        parameters: []
+      },
+
+      pagination: {
+        toggle: false,
+        bottomToggle: false,
+        amount: 12,
+      },
+
+    },
+
+
+    [charadex.sheet.pages.gallery]: {
+
+      sheetPage: charadex.sheet.pages.gallery,
+      primaryProperty: 'id',
+      relatedProperty: 'horse',
+      dexSelector: 'gallery',
+      profileProperty: 'id',
+      profileToggle: true,
+      sitePage: 'gallery',
+
+      sort: {
+        toggle: true,
+        key: "timestamp",
+        order: "desc",
+        parameters: []
+      },
+
+      pagination: {
+        toggle: true,
+        bottomToggle: true,
+        amount: 6,
+      },
+    },
+
+    [charadex.sheet.pages.slots]: {
+
+      sheetPage: charadex.sheet.pages.slots,
+      primaryProperty: 'id',
+      relatedProperty: 'horse',
+      dexSelector: 'slots',
+      profileProperty: 'design',
+      profileToggle: false,
+
+      sort: {
+        toggle: true,
+        key: "timestamp",
+        order: "asc",
+        parameters: []
+      },
+
+      pagination: {
+        toggle: false,
+        bottomToggle: true,
+        amount: 6,
+      },
+    },
 
   }
 
@@ -514,6 +610,53 @@ charadex.page.player = {
 
 };
 
+/* Slots
+/* --------------------------------------------------------------- */
+charadex.page.slots = {
+
+  sheetPage: charadex.sheet.pages.slots,
+  sitePage: 'slots',
+  dexSelector: 'charadex',
+
+  sort: {
+    toggle: true,
+    key: "timestamp",
+    order: "desc",
+    parameters: []
+  },
+
+  pagination: {
+    toggle: true,
+    bottomToggle: true,
+    amount: 10,
+  },
+
+  filters: {
+    toggle: true,
+    parameters: {
+      'Status': charadex.sheet.options.slotStatutes,
+    }
+  },
+
+  fauxFolder: {
+    toggle: false,
+    folderProperty: '',
+    parameters: [],
+  },
+
+  search: {
+    toggle: true,
+    filterToggle: true,
+    parameters: ['All', 'Timestamp', 'Horse Name', 'Owner']
+  },
+
+  prevNext: {
+    toggle: false,
+    text: '',
+  },
+
+};
+
 
 /* Index
 /* --------------------------------------------------------------- */
@@ -535,7 +678,13 @@ charadex.page.index = {
     ... charadex.page.masterlist,
     dexSelector: 'design',
     amount: 4,
-  }
+  },
+
+  gallery: {
+    ...charadex.page.gallery,
+    dexSelector: 'artwork',
+    amount: 4,
+  },
 
 };
 
