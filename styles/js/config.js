@@ -15,9 +15,9 @@ let charadex = {};
 /* Any preview links will still show Charadex's information
 /* ==================================================================== */
 charadex.site = {
-  title: "hARPG Dex",
-  url: "https://draconizations.github.io/harpg-dex/",
-  description: `A horse ARPG character tracker.`
+  title: "Morning Line",
+  url: "https://github.com/mvseratii/morning-line",
+  description: `A hybrid SIM horse racing art game!`
 }
 
 /* ==================================================================== */
@@ -26,7 +26,7 @@ charadex.site = {
 /* ==================================================================== */
 charadex.sheet = {
 
-  id: "1O44LBbOudteR7Ir9o4OPNiXzCDB1VO9hx8dAiKcmj9Y",
+  id: "13hY4VFyR-c1dOmHOjZtI70T7WzKsIbl3nHK__ekOHbw",
 
   pages: {
     masterlist: "masterlist",
